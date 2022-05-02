@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import java.io.Serializable
 
@@ -58,10 +59,25 @@ class LoginActivity: AppCompatActivity() {
             }
         }
 
+        val resultlauncher= registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) {result ->
+            //Codigo a ejecutarse al regresar al activity
+            val intentRespuesta = result.data
+            val username: String =intentRespuesta!!.getStringExtra(
+                "USERNAME_REGISTRADO"
+            )!!
+            meteUsuarioCorreo!!.setText(username)
+        }
+
         ButRegistrar!!.setOnClickListener { v: View ->
             val intent = Intent()
             intent.setClass(this, RegistroActivity::class.java)
-            startActivity(intent)
+            resultlauncher.launch(intent)
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
     }
 }
