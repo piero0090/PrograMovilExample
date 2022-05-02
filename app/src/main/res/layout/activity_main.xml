@@ -7,6 +7,12 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <TextView
+        android:id="@+id/txtusername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Username:"/>
+
     <com.example.myapplication07.views.ULFace
         android:id="@+id/cara"
         android:layout_width="match_parent"
